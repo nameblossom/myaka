@@ -1,0 +1,18 @@
+<% provide(:title,'reset password') %>
+
+<h2>reset password</h2>
+
+<% if @reset.nil? %>
+<p>That reset code is not recognized and may be expired.</p>
+<% else %>
+<p>You may now change the password to <b><%= @reset.aka.domain_name %></b>.</p>
+<%= form_for :reset, url: '/loginhelp/reset' do |f| %>
+<%= f.hidden_field :id, value: @id %>
+<%= f.hidden_field :key, value: @key %>
+<%= f.label :password, "new password" %>
+<%= f.password_field :password %><br>
+<%= f.label :confirm_password, "confirm password" %>
+<%= f.password_field :confirm_password %><br>
+<%= f.submit "change password", class:'btn' %>
+<% end %>
+<% end %>

@@ -1,0 +1,13 @@
+
+<%= form_for(:session, url: sessions_path) do |f| %>
+<fieldset>
+
+<%= f.label :aka, label:'AKA' %>
+<%= f.text_field :aka, value: @aka_subdomain %> .aka.nu
+
+<%= f.label :password %>
+<%= f.password_field :password %>
+<br>
+<%= f.submit "Sign in", class: "btn" %> <a href='/loginhelp'>forgot aka or password</a>
+</fieldset>
+<% end %>

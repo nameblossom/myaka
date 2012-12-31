@@ -1,0 +1,9 @@
+<h1>Add a profile link to <%= current_aka.domain_name %></h1>
+
+<%= form_for @link do |f| %>
+  <%= render 'create_form_fields', object: f %>
+  <br>
+  <%= f.submit 'Create link' %>
+<% end %>
+
+</h1>

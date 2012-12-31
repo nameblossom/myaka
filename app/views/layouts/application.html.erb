@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- <%= Myaka::Application.config.environment_name %> -->
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title><%= full_title(yield(:title)) %></title>
+  <script type='text/javascript'>if (window.parent != window) window.parent.location.replace(location.href);</script>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+<link href='https://fonts.googleapis.com/css?family=Contrail+One|Open+Sans:400italic,600italic,400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div style='max-width: 50em; margin: auto; margin-top: 3em; padding: 1em'>
+
+<% if signed_in? %>
+<p style='text-align:right'>hi <%= current_aka.subdomain %> | <%= link_to 'sign out', signout_path, method:'delete' %></p>
+<% end %>
+
+<h1><a title='My.AKA.nu Home' href='/'><%= image_tag 'aka_nu_beta_183_82.png', alt:'AKA.nu', width: 183, height: 82 %></a></h1>
+
+<%= render 'shared/flashes' %>
+
+<%= yield %>
+
+</div>
+
+<p style='text-align: center; margin-top: 10em'>my.aka.nu is <a href='https://github.com/nameblossom/myaka/'>open-source</a>.
+  see <a href='/privacy'>privacy &amp; other policies</a></p>
+
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

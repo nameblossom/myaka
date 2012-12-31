@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  database: myaka_dev
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  database: myaka_test
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  database: myaka_live
+  pool: 5
+  timeout: 5000

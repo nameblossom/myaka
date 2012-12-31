@@ -1,0 +1,12 @@
+<% provide(:title, 'edit profile page') %>
+<h2>profile page html</h2>
+
+<%= form_for(:profile, url: '/editprofile') do |f| %>
+
+<textarea style="width:100%;height:20em" name="profile[profile_source]"><%= current_aka.profile.profile_source || default_profile %></textarea><br>
+
+<%= f.submit 'Save Profile Page', class:'btn', name:'save' %>
+
+<%= f.submit 'Preview Changes', class:'btn', name:'preview' %>
+
+<% end %>

@@ -1,0 +1,58 @@
+<%= form_for(@aka) do |f| %>
+<% if @aka.errors.any? %>
+<div class='alert alert-error'>
+<p>We're almost there!</p>
+<ol>
+  <% @aka.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ol>
+</div>
+<% end %>
+
+<ol>
+<li>
+<p>First pick a username. With <i>.<%= Myaka::Application.config.aka_domain %></i> added to the end this is your AKA name.
+  It can contain up to 63 letters, numbers, and hyphens (-) and has to start with a letter.
+  For now only English letters work. Once you pick your name you can't change it, but you can
+  always get a new one.
+</p>
+<p class='indent'>
+<label for="subdomain">Username</label>
+<input type="text" name="subdomain" value="<%= @aka.subdomain %>"> .<%= Myaka::Application.config.aka_domain %>
+</p></li>
+<li>
+<p>You can optionally pick a human-fiendly display name, unless you want to be known by just your AKA.
+  This doesn't have to be your real name.</p>
+<p class='indent'>
+<%= f.label :display_name %>
+<%= f.text_field :display_name %>
+</p></li>
+<li>
+<p>An e-mail address is optional, but highly recommended. Without one you can't reset your password if
+  you forget it, and you might miss out on important announcements. If you
+  want to try AKA.nu out before giving up your e-mail address you can add one later.</p>
+<p class='indent'>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+</p>
+</li>
+<li>
+<p>Finally you need to pick a password. Pretty much any password will do. While bcrypt and SSL are used
+  so your password is in principle secure, AKA.nu hasn't really been tested so don't give us your bank
+  password or anything.</p>
+<p class='indent'>
+<%= f.label :password %>
+<%= f.password_field :password %>
+<br>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation %>
+</p></li>
+<li>
+<p>That's it! Okay, you do have to click a button (or hit enter). We do have some
+  <a href='/privacy'>privacy &amp; legal</a> terms of sorts.</p>
+<p class='indent'>
+  <%= f.submit 'Create AKA', class:'btn' %>
+</p>
+</ol>
+<% end %>

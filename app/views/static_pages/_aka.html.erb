@@ -1,0 +1,120 @@
+<% provide(:title, "your aka (#{current_aka.subdomain})") %>
+<div class='indent'>
+  <p>Hi <b><%= current_aka.display_or_subdomain_name %></b>, and thanks for giving AKA.nu a try. If you have any questions or
+    comments or are interested in helping out, you can share it with the Nameblossom <a href='http://tech.groups.yahoo.com/group/nameblossom'>Yahoo Group</a> or
+    let me know directly at <a href='mailto:paul@aka.nu'>paul@aka.nu</a>.
+  </p>
+</div>
+<p style='text-align: right'>
+  &#151; Paul Odin (aka <a href='https://paul.aka.nu/'>paul.aka.nu</a>)
+</p>
+<h2>profile links</h2>
+
+<div class='indent'>
+  <p>Add links to your profile pages elsewhere on the Web. Apart from appearing in your profile page they get added to a special
+    <b>host-meta</b> file which in principle allows apps to follow your activity across multiple channels automatically, but
+    that code hasn't been written yet. (Do you want to work on that?)
+  </p>
+  <p><b>Example:</b> If you have a Tumblr blog at <%= current_aka.subdomain %>.tumblr.com, you might add a link with the title
+    <i>Tumblr</i> or <i>Blog</i> and the URL <i>http://<%= current_aka.subdomain %>.tumblr.com</i>.
+</div>
+
+<div id='profile-links-container'>
+  <%= render 'profile_links/link_list' %>
+</div>
+
+<p style='text-align: right'><c class='btn' onclick='showLink();return false' href='<%= new_profile_link_path %>'>Add link</a></p>
+
+<h2>profile page</h1>
+
+<div class='indent'>
+  <p>View your profile page at <b><a href='https://<%= current_aka.domain_name %>'><%= current_aka.domain_name %></a></b>.
+  <p>You can totally customize the HTML of your profile page. <a href='/editprofile'>Edit it here</a>.</p>
+  <p>This isn't just plain HTML; there are some
+    <a href='http://mustache.github.com/'>mustache</a> variables available for you to use.</p>
+    <p><a href='javascript:void()' onclick='$("#mustache_example").toggle("fast","linear")'>Show example</a>.</p>
+  <pre style='display:none' id='mustache_example'><code><%= default_profile %></code></pre>
+</div>
+
+<h2>display name</h2>
+<div class='indent'>
+  <%= form_for :current_aka, url:'/', method:'PUT', remote: true, html:{name:'displayname_form'} do |f| %>
+  <input type='hidden' name='form_name' value='displayname_form'>
+  <div class='form_messages'></div>
+  <%= f.text_field :display_name, class: 'input-xlarge', value: current_aka.display_or_subdomain_name %><br>
+  <%= f.submit 'Change Name', class: 'btn' %>
+  <% end %>
+</div>
+
+<h2>tent server</h2>
+
+<div class='indent'>
+  <p><a href='https://tent.io'>Tent</a> is a new distributed social networking protocol which uses domain names for your identity,
+    which should make it a perfect match for your AKA. If you have a Tent server available you can put its URL here.</p>
+  <p>You probably also want to add a "Tent" link to your profile links which points to your Tent profile page with post listings and
+    such.</p>
+  <%= form_for :current_aka, url:'/', method: 'PUT', remote: true, html:{name:'tent_form'} do |f| %>
+  <input type='hidden' name='form_name' value='tent_form'>
+  <div class='form_messages'></div>
+  <div>
+    <%= f.text_field :tent_server, class:"input-xlarge", value:current_aka.tent_server %><br>
+    <%= f.submit "Change Tent Server", class:"btn" %>
+  </div>
+  <% end %>
+</div>
+
+<h2>password and e-mail address</h2>
+
+<div class='indent'>
+  <%= form_for :current_aka, url:'/', method:'PUT', remote: true, html:{name:'acct_form'} do |f| %>
+  <input type='hidden' name='form_name' value='acct_form'>
+  <div class='form_messages'></div>
+  <div>
+    <label for='current_password'>current password (required for changes)</label>
+    <input type='password' id='current_password' name='current_password' class='input-xlarge clear_on_save'><br>
+    <%= f.label :email, "e-mail (private)" %>
+    <%= f.text_field :email, class:'input-xlarge' %><br>
+    <%= f.label :password, 'new password' %>
+    <%= f.password_field :password, class:'input-xlarge clear_on_save' %><br>
+    <%= f.label :password_confirmation, 'confirm new password' %>
+    <%= f.password_field :password_confirmation, class:'input-xlarge clear_on_save' %><br>
+    <%= f.submit "Apply Changes", class:'btn' %>
+  </div>
+  <% end %>
+</div>
+
+<h2>automatic login</h2>
+
+<div class='indent'>
+  <p>If you're already logged in to your AKA then you'll be logged into any of these sites automatically without confirmation.
+    If you want to stop automatic login for any of the sites just click the 'stop' link.</p>
+  <ul style='list-style-type:none;margin-left:0'>
+    <% current_aka.openid_trust_roots.each do |r| %>
+    <li id='trustroot_<%= r.id %>'><%= r.trust_root %> &nbsp;
+      <%= link_to "stop", "/trustroot/#{r.id}", method: "DELETE", remote: true %></li>
+    <% end %>
+  </ul>
+</div>
+  
+
+<%= form_tag '', id:'link_form', remote: true do |f| %>
+<input id='link_form_method' type='hidden' name='_method' value='POST'>
+<div class="modal hide fade" id='profile-link-editor'>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Edit Profile Link</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <span style='float: left'>
+      <a href='#' class='btn btn-danger' onclick='deleteAka()'>Delete</a>
+    </span>
+    <span>
+      <a href="#" class="btn" data-dismiss='modal'>Cancel</a>
+      <input type='submit' class='btn btn-primary' value='Save Changes'>
+    </span>
+  </div>
+</div>
+<% end %>

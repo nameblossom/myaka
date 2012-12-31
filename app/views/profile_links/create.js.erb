@@ -1,0 +1,12 @@
+var errors = $('#profile_link_errors').hide().empty();
+
+<% if @link.errors.any? %>
+   <% @link.errors.full_messages.each do |msg| %>
+   errors.append($('<li>').text("<%= escape_javascript(msg) %>"));
+   <% end %>
+   errors.show();
+<% end %>
+
+<% if @saved %>
+   refreshProfileLinkList();
+<% end %>

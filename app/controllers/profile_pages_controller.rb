@@ -1,0 +1,2 @@
+class ProfilePagesController < ApplicationController
+end

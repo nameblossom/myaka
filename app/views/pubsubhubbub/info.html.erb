@@ -1,0 +1,35 @@
+<% provide(:title, "host-meta hub") %>
+
+<h2>host-meta hub</h2>
+
+<p>PubSubHubbub is an open protocol for distributing updates. It's designed for Atom and RSS feeds, but I'm using
+  it for host-meta files.</p>
+
+<p>You can try it out from your browser right here.</p>
+
+<div class='well'>
+<form method="POST">
+
+  <h4>Required Fields</h4>
+
+  <label for="callback">Callback URL for notifications</label>
+  <input type="text" id="callback" name="hub.callback"><br>
+
+  <label for="mode">Mode (select one)</label>
+  <select id="mode" name="hub.mode">
+    <option value="subscribe">subscribe</option>
+    <option value="unsubscribe">unsubscribe</option>
+  </select><br>
+
+  Verification Modes (at least one)<br>
+  <input type="checkbox" name="hub.verify" value="async" id="verify_async">
+  <label style="display:inline" for="verify_async">async</label><br>
+  <input type="checkbox" name="hub.verify" value="sync" id="verify_sync"> 
+  <label style="display:inline" for="verify_sync">sync</label>
+
+  <h4>Optional Fields</h4>
+
+  <input type='submit' value='Send Request' class='btn'>
+
+</form>
+</div>

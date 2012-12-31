@@ -1,0 +1,10 @@
+$form = $(document.forms.<%= @form_name %>);
+$to = $form.find('.form_messages').empty();
+<% if @saved %>
+   miniflash($to, 'success', 'Changes saved');
+   $form.find('.clear_on_save').val('');
+<% else %>
+   <% @errors.each do |e| %>
+      miniflash($to, 'error', "<%= escape_javascript(e).html_safe %>");
+   <% end %>
+<% end %>

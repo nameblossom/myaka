@@ -1,0 +1,23 @@
+{
+   "subject":"dns:<%= escape_javascript(@aka.domain_name).html_safe %>"
+,  "expires":"<%= 24.hours.from_now.iso8601 %>"
+,  "title":"<%= escape_javascript(@aka.display_or_subdomain_name).html_safe %>"
+,  "links":[
+     {
+          "id":"OpenId2"
+     ,    "rel":"http://specs.openid.net/auth/2.0/provider"
+     ,    "href":"https://<%= Myaka::Application.config.myaka_domain %>/openid"
+     }
+   <% @aka.profile_links.each_with_index do |link,index| %>
+   , {
+          "id":"L<%= link.id %>"
+      ,	  "rel":"https://aka.nu/Profile"
+      ,	  "href":"<%= escape_javascript(link.href).html_safe %>"
+      ,	  "titles":{"default":"<%= escape_javascript(link.title).html_safe %>"}
+      ,	  "properties": {
+	  	"https://aka.nu/Autofollow": "<%= link.autofollow ? "yes":"no" %>"
+	  }
+      }
+   <% end %>
+   ]
+}

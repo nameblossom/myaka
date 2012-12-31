@@ -1,0 +1,18 @@
+<ul id='profile_link_errors'>
+
+</ul>
+
+
+<label for='link_title_field'>Title</label>
+<input type='text' name='profile_link[title]' id='link_title_field' value='<%= @link.title %>'><br>
+
+<label for='link_href_field'>URL (must be HTTP or HTTPS)</label>
+<input type='text' name='profile_link[href]' id='link_href_field' value='<%= @link.href %>'
+       onchange="$('#link_href_link').attr('href',this.value)">
+<a href='<%= @link.href %>' title='Open link' id='link_href_link'>&rarr;</a><br> 
+
+<input type='hidden' name='profile_link[autofollow]' value='false'>
+<input type='checkbox' name='profile_link[autofollow]' id='link_autofollow_field' value='true'<%= @link.autofollow ? 'checked=checked' : '' %>>
+<label style='display:inline' for='link_autofollow_field'>Followers should automatically follow activity here<br>
+
+

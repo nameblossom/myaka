@@ -1,0 +1,6 @@
+<% require 'cgi' %>
+<% flash.each do |key, value| %>
+<div class='alert alert-<%= key %>'><button type='button' class='close' data-dismiss='alert'>&times;</button>
+  <%= CGI.escape_html(value).sub(/\n/,'<br>').html_safe %>
+</div>
+<% end %>

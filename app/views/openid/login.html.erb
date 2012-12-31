@@ -1,0 +1,20 @@
+<% provide(:title, 'openid login') %>
+<h2>log in to <%= @target_domain %>?</h2>
+<%= form_for(:answer, url: '/openid/confirm') do |f| %>
+
+<% if @correct_aka %>
+  <p>You're logged in to aka.nu as <b><%= current_aka.domain_name %></b>. Do you want to log in to <%= @target_domain %>?</p>
+<% else %>
+  <p><strong>You're not logged in</strong> as <%= @specified_subdomain %>. Enter the correct password and we'll send you on your way.</p>
+  <%= f.label :password %>
+  <%= f.password_field :password, class:'input-xlarge' %><br>
+<% end %>
+
+<%= f.check_box :trust %>
+<%= f.label :trust, "Stay logged in to #{@oidreq.trust_root}", style:'display:inline' %><br><br>
+
+<%= f.submit "Log in", class: 'btn' %>
+<a class='btn' href='<%= @cancel_url ? @cancel_url : root_path %>'
+   onclick='location.replace(this.href)'>Cancel</a>
+
+<% end %>

@@ -1,0 +1,24 @@
+<% provide(:title,'login help') %>
+<h2>forgot your aka?</h2>
+
+<div class='indent'>
+  <p>If you added an e-mail address to your aka then you can find it by entering your e-mail here; you'll be sent a list of the
+    AKAs on aka.nu with that e-mail address.</p>
+  <%= form_for :aka_lookup, :url => '/loginhelp/' do |f| %>
+  <%= f.text_field :email %><br>
+  <%= f.submit 'Send E-mail', class: 'btn' %>
+  <% end %>
+
+</div>
+
+<h2>forgot your password?</h2>
+
+<div class='indent'>
+  <p>If you added an e-mail address to your aka then you can reset your password by entering your aka here; you'll be sent a 
+    password reset link.</p>
+  <%= form_for :password_reset, :url => '/loginhelp' do |f| %>
+  <%= f.text_field :subdomain %> .aka.nu<br>
+  <%= f.submit 'Send E-mail', class: 'btn' %>
+  <% end %>
+</div>
+

@@ -1,0 +1,18 @@
+
+<table id='profile-links' class='table table-hover table-bordered'>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_aka.profile_links.sort_by(&:id).each do |link| %>
+    <tr onclick='showLink(<%= link.id %>)' style='cursor:pointer'>
+      <td><a href='<%= profile_link_path(link) %>' onclick='showLink(<%= link.id %>);return false'><%= link.title %></a></td>
+      <td><%= link.href %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

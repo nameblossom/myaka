@@ -1,0 +1,28 @@
+Myaka::Application.routes.draw do
+  constraints lambda {|req| req.headers['Host'] == Myaka::Application.config.myaka_domain } do
+    resources :akas
+    put '/', to: 'akas#update_current'
+    resources :sessions, only: [:new, :create, :destroy]
+    resources :profile_links
+    root to: 'static_pages#home'
+    get '/loginhelp', to: 'static_pages#login_help'
+    post '/loginhelp', to: 'static_pages#send_login_help_email'
+    get '/loginhelp/reset', to: 'static_pages#begin_reset'
+    post '/loginhelp/reset', to: 'static_pages#finish_reset'
+    match '/signup', to: 'akas#new'
+    match '/signin', to: 'sessions#new'
+    match '/signout', to: 'sessions#destroy'
+    match '/openid', to: 'openid#main'
+    get '/editprofile', to: 'akas#profile_editor'
+    post '/editprofile', to: 'akas#edit_profile'
+    post '/openid/confirm', to: 'openid#confirm'
+    get '/hub', to: 'pubsubhubbub#info'
+    post '/hub', to: 'pubsubhubbub#register'
+    get '/privacy', to: 'static_pages#privacy'
+    delete '/trustroot/:id', to: 'akas#remove_trust_root'
+  end
+  constraints lambda {|req| req.headers['Host'] != Myaka::Application.config.myaka_domain } do
+    root to: 'profile#home'
+    match '/.well-known/host-meta', to: 'profile#host_meta', defaults: { format: :xrd }
+  end
+end

@@ -1,0 +1,15 @@
+<XRD xmlns='http://docs.oasis-open.org/ns/xri/xrd-1.0'>
+     <Subject>dns:<%= @aka.domain_name %></Subject>
+     <Expires><%= 24.hours.from_now.iso8601 %></Expires>
+     <Title><%= @aka.display_or_subdomain_name %></Title>
+     <% @aka.profile_links.each do |link| %>
+     <Link rel='https://aka.nu/Profile' href='<%= link.href %>' xml:id='L<%= link.id %>'>
+         <Title><%= link.title %></Title>
+         <Property type='https://aka.nu/Autofollow'><%= link.autofollow ? 'yes' : 'no' %></Property>
+     </Link>
+     <% end %>
+     <% unless @aka.tent_server.blank? %>
+     <Link rel='https://tent.io/rels/profile' href='<%= @aka.tent_server.sub(/\/$/,'') %>/profile'/>
+     <% end %>
+     <Link rel='http://specs.openid.net/auth/2.0/provider' href='https://<%= Myaka::Application.config.myaka_domain %>/openid' xml:id='OpenId2'/>
+</XRD>

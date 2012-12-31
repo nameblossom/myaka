@@ -1,0 +1,18 @@
+Hi <%= @email %>,
+
+Someone (hopefully you) asked to send you a list of all the AKAs associated with your e-mail address at <%= Myaka::Application.config.myaka_domain %>.
+<% if @akas.empty? %>
+
+Turns out, we don't have any AKAs in our records with this e-mail address.
+<% elsif @akas.size == 1 %>
+
+You have one: <%= @akas[0].domain_name %> (login: <%= @akas[0].subdomain %>)
+<% else %>
+
+Here are all <%= @akas.size %> of them:
+<% @akas.each do |aka| %>
+ - <%= aka.domain_name %> (login: <%= aka.subdomain %>)
+<% end %>
+<% end %>
+
+Thank you for your support of Project AKA.

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title><%= @aka.display_name %></title>
+  <link rel='openid.server' href='https://<%= Myaka::Application.config.myaka_domain %>/openid'>
+  <link rel='openid2.provider' href='https://<%= Myaka::Application.config.myaka_domain %>/openid'>
+  <% if @aka.tent_server %>
+  <link rel='https://tent.io/1.0/rels/server' href='<%= @aka.tent_server %>'>
+  <% end %>
+  <style type='text/css'>
+    body { font-family: 'Contrail One', sans-serif; text-align: center; 
+    margin-top: 10em }
+    a { text-decoration: none; color: blue }
+  </style>
+</head>
+<body>
+  <p>This <a href='https://aka.nu/'>aka</a> belongs to
+    <big><%= @aka.display_name %></big>.
+    <% unless @aka.profile_links.empty? %>
+    Also:
+    <% @aka.profile_links.each do |link| %>
+    <a href='<%= link.href %>'><%= link.title %></a>.
+    <% end %>
+    <% end %>
+  </p>
+</body>
+</html>

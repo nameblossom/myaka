@@ -1,0 +1,43 @@
+<% provide(:title, 'privacy policy etc.') %>
+<div class='indent'>
+  <p>One day I'll take Automattic's <a href='http://automattic.com/privacy/'>privacy policy</a> and <a href='http://en.wordpress.com/tos/'>terms of service</a> and adapt it
+    to aka.nu (Do you want to do that? <a href='mailto:paul@aka.nu'>paul@aka.nu</a>) but until then this will have to do.</p>
+  <% if current_aka %>
+  <p>
+    <% if current_aka.email.blank? %>
+    Note: <strong>You didn't provide an e-mail address</strong> so you won't be notified of any changes to these policies.
+    <% else %>
+    Note: Your e-mail address on file is <b><%= current_aka.email %></b>. If there are big changes to these policies you'll be notified there.
+    <% end %>
+  </p>
+  <% end %>
+</div>
+<h2>privacy policy</h2>
+<div class='indent'>
+  <p>Your <b>private information</b> consists of your e-mail address and password, and the logs of your activity on AKA.nu. This
+    isn't shared with anybody else, apart from residing on and passing through the service providers AKA.nu is built on.</p>
+  <p>Your <b>public information</b> consists of everything else, including your Profile Links, Tent Server URL, Display Name,
+    and Profile Page HTML. Those are publically available to anyone who knows (or can guess) your AKA, but is otherwise not
+    shared.</p>
+  <p>Aka.nu currently doesn't use any third-party analytics or tracking software. Your passwords are stored such that nobody can
+    read them.</p>
+</div>
+<h2>terms &amp; conditions</h2>
+<div class='indent'>
+  <p>For now just assume that your aka.nu account can be taken away from you at any time for any reason whatsoever, but I probably
+    won't do that unless you're doing something bad. If you give a valid e-mail address we might be able to work things out.</p>
+  <p>You're not at all required to use your real name, and you're encouraged to create as many AKAs as you wish. But don't impersonate
+    someone else (unless they let you) and especially don't pretend to be associated with aka.nu if you're not.</p>
+  <p>Aka.nu is based in the United States which naturally determines <a href='http://www.law.cornell.edu/uscode/text'>what's legal and not</a>. The
+    .nu TLD belongs to the island nation of <a href='http://www.niueisland.com/'>Niue</a>.</p>
+</div>
+<h2>proposition 65 warning</h2>
+<div class='indent'>
+  <p>This product contains chemicals known to the State of California to cause cancer and birth defects or other
+    reproductive harm.</p>
+</div>
+<h2>attribution</h2>
+<div class='indent'>
+  <p>The cloud graphic used in the Project AKA and AKA.nu logos comes from <a href='http://yay.se/resources/clouds-vector-icons'>here</a> courtesy Olaf Brickar, are are licensed
+    under a Creative Commons <a href='http://creativecommons.org/licenses/by/3.0/'>Attribution licence</a>. Thanks!</p>
+</div>

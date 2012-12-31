@@ -1,0 +1,15 @@
+<%= form_for(@link) do |f| %>
+
+<%= f.label :title %>
+<%= f.text_field :title %><br>
+
+<%= f.label :href %>
+<%= f.text_field :href %><br>
+
+<%= f.check_box :autofollow %> <%= f.label :autofollow, style: 'display:inline' %><br>
+
+
+<%= f.submit 'Create AKA', style: (@is_modal ? 'display:none' : '')  %>
+
+
+<% end %>

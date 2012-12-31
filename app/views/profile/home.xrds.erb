@@ -1,0 +1,11 @@
+<xrds:XRDS xmlns:xrds="xri://$xrds" xmlns="xri://$xrd*($v*2.0)">
+  <XRD>
+    <CanonicalID><%= @aka.url %></CanonicalID>
+    <% %w{ http://specs.openid.net/auth/2.0/signon http://openid.net/server/1.1 http://openid.net/server/1.0 }.each do |type| %>
+    <Service>
+      <Type><%= type %></Type>
+      <URI>https://<%= Myaka::Application.config.myaka_domain %>/openid</URI>
+    </Service>
+    <% end %>
+  </XRD>
+</xrds:XRDS>

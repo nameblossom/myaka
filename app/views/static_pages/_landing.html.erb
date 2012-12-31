@@ -1,0 +1,14 @@
+<% provide(:title,'welcome') %>
+<div class='indent'>
+  <p>This is My.AKA.nu, the first (and in fact, only) place to get a free AKA.</p>
+  <p>If you don't know what an AKA is, it's yet another sort of internet identity, this time based on domain names.
+    You can read more about them on the main <a href='http://nameblossom.org/akas/'>Project AKA</a> page.
+</p>
+</div>
+<h2>If you already have an account, welcome back.</h2>
+<div class='indent'>
+<%= render 'sessions/signin_form' %>
+</div>
+<h2>And if you don't, it's really easy to create one.</h2>
+
+<%= render 'akas/new_aka_form' %>
