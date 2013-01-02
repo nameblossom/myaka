@@ -11,6 +11,7 @@ Rails web application for managing [akas](http://nameblossom.org/akas/), used by
 * Reset password
 * Find akas given e-mail address
 * Change password, email, display name
+* Log in to other sites using OpenID
 
 ## Running it
 
