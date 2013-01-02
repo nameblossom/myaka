@@ -20,6 +20,7 @@ Myaka::Application.routes.draw do
     post '/hub', to: 'pubsubhubbub#register'
     get '/privacy', to: 'static_pages#privacy'
     delete '/trustroot/:id', to: 'akas#remove_trust_root'
+    get '/unsubscribe', to: 'mailing_list#unsubscribe'
   end
   constraints lambda {|req| req.headers['Host'] != Myaka::Application.config.myaka_domain } do
     root to: 'profile#home'

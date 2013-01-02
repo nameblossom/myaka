@@ -34,7 +34,9 @@
   want to try AKA.nu out before giving up your e-mail address you can add one later.</p>
 <p class='indent'>
   <%= f.label :email %>
-  <%= f.text_field :email %>
+  <%= f.text_field :email %><br>
+  <%= f.check_box :keep_me_updated %>
+  <%= f.label :keep_me_updated, "Send me updates about new features and things I can do with my aka", style:'display:inline' %>
 </p>
 </li>
 <li>

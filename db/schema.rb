@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121229212056) do
+ActiveRecord::Schema.define(:version => 20130102042535) do
 
   create_table "akas", :force => true do |t|
-    t.string   "subdomain",       :null => false
+    t.string   "subdomain",                         :null => false
     t.string   "email"
     t.string   "display_name"
     t.string   "password_digest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "tent_server"
+    t.boolean  "keep_me_updated", :default => true
   end
 
   add_index "akas", ["email"], :name => "index_akas_on_email"

@@ -83,6 +83,20 @@
   <% end %>
 </div>
 
+<h2>keep me updated</h2>
+<div class='indent'>
+  <p>Do you want to recieve updates about new features and things you can do with your aka? Even if you aren't subscribed, you
+    still may get important messages about things like security advisories and policy changes.</p>
+  <%= form_for :current_aka, url:'/', method:'PUT', remote: true, html:{name:'mailing_list_form'} do |f| %>
+  <input type='hidden' name='form_name' value='mailing_list_form'>
+  <div class='form_messages'></div>
+  <div>
+    <%= f.check_box :keep_me_updated %> <%= f.label :keep_me_updated, style:'display:inline' %><br>
+    <%= f.submit "Apply Changes", class:'btn' %>
+    </div>
+  <% end %>
+</div>
+
 <h2>automatic login</h2>
 
 <div class='indent'>

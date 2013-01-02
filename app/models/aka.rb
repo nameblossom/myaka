@@ -1,6 +1,6 @@
 class Aka < ActiveRecord::Base
   has_secure_password
-  attr_accessible :display_name, :email, :password, :password_confirmation, :tent_server
+  attr_accessible :display_name, :email, :password, :password_confirmation, :tent_server, :keep_me_updated
   validates(:subdomain,
             presence: true,
             uniqueness: { case_sensitive: false },
