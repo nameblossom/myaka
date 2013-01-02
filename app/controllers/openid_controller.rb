@@ -111,7 +111,7 @@ class OpenidController < ApplicationController
 
     session[:last_oidreq] = nil
     oidresp = oidreq.answer(true, nil, current_aka.url)
-    if params[:answer][:trust] and OpenidTrustRoot.where(aka_id: current_aka.id, trust_root: oidreq.trust_root).empty?
+    if params[:answer][:trust] == '1' and OpenidTrustRoot.where(aka_id: current_aka.id, trust_root: oidreq.trust_root).empty?
       current_aka.openid_trust_roots.build(trust_root: oidreq.trust_root).save
     end
     # todo sreg/pape
