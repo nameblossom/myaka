@@ -10,7 +10,7 @@ class ProfileController < ActionController::Base
       return
     end
     unless @aka.tent_server.blank?
-      response.headers['Link'] = "<#{@aka.tent_server.sub(/\/$/,'')}/profile>; rel=\"https://tent.io/rels/profile\""
+      response.headers['Link'] = "<#{@aka.tent_server.sub(/\/\Z/,'')}/profile>; rel=\"https://tent.io/rels/profile\""
     end
     respond_to do |format|
       format.html { render text: self.render_profile(@aka) }
@@ -31,7 +31,8 @@ class ProfileController < ActionController::Base
   end
 
   def get_aka
-    @aka = Aka.find_by_subdomain(request.headers['Host'].sub(/\.aka\.nu$/,''))
+    subdomain = request.headers['Host'].sub(/\.#{Regexp.escape(Myaka::Application.config.aka_domain)}\Z/,'')
+    @aka = Aka.find_by_subdomain subdomain
   end
 
 end

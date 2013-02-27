@@ -74,7 +74,7 @@ class OpenidController < ApplicationController
   end
 
   def show_decision_page(oidreq)
-    @target_domain = oidreq.return_to.sub(/^https?\:\/\//,'').sub(/\/.*$/,'')
+    @target_domain = oidreq.return_to.sub(/\Ahttps?\:\/\//,'').sub(/\/.*\Z/,'')
     @oidreq = oidreq
     @cancel_url = oidreq.cancel_url
     @specified_subdomain = oidreq.identity ? get_subdomain(oidreq.identity) : nil

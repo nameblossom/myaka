@@ -37,7 +37,7 @@ END
     profilelinks = aka.profile_links.map { |link| { url: link.href, title: link.title } }
     headertags = "<link rel='openid2.provider openid.server' href='https://#{Myaka::Application.config.myaka_domain}/openid' />"
     unless aka.tent_server.blank?
-      headertags += "<link rel='https://tent.io/rels/profile' href='#{ aka.tent_server.sub(/\/$/,'') }/profile'/>"
+      headertags += "<link rel='https://tent.io/rels/profile' href='#{ aka.tent_server.sub(/\/\Z/,'') }/profile'/>"
     end
     
     begin
@@ -48,7 +48,7 @@ END
   end
 
   def get_subdomain openid
-    return openid.sub(/https?\:\/\//,'').sub(/\.#{Regexp.quote(Myaka::Application.config.aka_domain)}\.?\/?$/,'')
+    return openid.sub(/https?\:\/\//,'').sub(/\.#{Regexp.quote(Myaka::Application.config.aka_domain)}\.?\/\Z/,'')
   end
 
 end

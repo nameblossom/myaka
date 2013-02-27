@@ -4,7 +4,7 @@ class Aka < ActiveRecord::Base
   validates(:subdomain,
             presence: true,
             uniqueness: { case_sensitive: false },
-            format: { with: /^(?!xn\-\-)[a-z0-9][a-z0-9\-]*$/ },
+            format: { with: /\A(?!xn\-\-)[a-z0-9][a-z0-9\-]*\z/ },
             exclusion: { in: ['www','support','ftp','mail','system','help',
                               'sys','aka','ns','ns1','ns2','ns3','ns4',
                               'downloads','store','marketplace','apps',
