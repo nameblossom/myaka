@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102042535) do
+ActiveRecord::Schema.define(:version => 20130228054803) do
 
   create_table "akas", :force => true do |t|
     t.string   "subdomain",                         :null => false
@@ -70,8 +70,9 @@ ActiveRecord::Schema.define(:version => 20130102042535) do
     t.string   "title"
     t.boolean  "autofollow"
     t.integer  "aka_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.string   "rel",        :default => "https://aka.nu/Profile"
   end
 
   add_index "profile_links", ["aka_id"], :name => "index_profile_links_on_aka_id"
