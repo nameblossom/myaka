@@ -10,7 +10,7 @@ class Aka < ActiveRecord::Base
                               'downloads','store','marketplace','apps',
                               'login','signin','openid','shop','dns','kb',
                               'admin','ssl','services','api','blog','news',
-                              'git','code','security','bugs','wiki'] })
+                              'git','code','security','bugs','wiki','profile-preview'] })
 
   has_many :profile_links
   has_many :openid_trust_roots

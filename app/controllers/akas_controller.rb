@@ -53,6 +53,10 @@ class AkasController < ApplicationController
     end
   end
 
+  def preview_profile
+    render text: render_profile(current_aka, params[:template])
+  end
+
   def edit_profile
     if params[:preview]
       render text: render_profile(current_aka, params[:profile][:profile_source])

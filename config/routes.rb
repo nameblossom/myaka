@@ -21,9 +21,18 @@ Myaka::Application.routes.draw do
     get '/privacy', to: 'static_pages#privacy'
     delete '/trustroot/:id', to: 'akas#remove_trust_root'
     get '/unsubscribe', to: 'mailing_list#unsubscribe'
+    if Myaka::Application.config.profile_preview_domain == Myaka::Application.config.myaka_domain
+      post '/preview-profile', to: 'akas#preview_profile'
+    end
   end
-  constraints lambda {|req| req.headers['Host'] != Myaka::Application.config.myaka_domain } do
+  constraints lambda {|req| (req.headers['Host'] != Myaka::Application.config.myaka_domain and
+                             req.headers['Host'] != Myaka::Application.config.profile_preview_domain) } do
     root to: 'profile#home'
     match '/.well-known/host-meta', to: 'profile#host_meta', defaults: { format: :xrd }
+  end
+  if Myaka::Application.config.profile_preview_domain != Myaka::Application.config.myaka_domain
+    constraints lambda {|req| req.headers['Host'] == Myaka::Application.config.profile_preview_domain} do
+      post '/preview-profile', to: 'profile#preview'
+    end
   end
 end

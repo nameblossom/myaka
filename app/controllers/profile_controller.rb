@@ -35,4 +35,8 @@ class ProfileController < ActionController::Base
     @aka = Aka.find_by_subdomain subdomain
   end
 
+  def preview
+    render text: render_profile(Aka.find_by_subdomain(params[:subdomain]), params[:template])
+  end
+
 end
