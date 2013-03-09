@@ -1,5 +1,6 @@
 module SessionsHelper
   def sign_in(aka)
+    reset_session
     session[:signed_in_as] = aka.id
     self.current_aka = aka
   end
@@ -18,7 +19,7 @@ module SessionsHelper
 
   def sign_out
     @current_aka = nil
-    session[:signed_in_as] = nil
+    reset_session
   end
 
 end
