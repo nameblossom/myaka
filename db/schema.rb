@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228054803) do
+ActiveRecord::Schema.define(:version => 20130404054135) do
 
   create_table "akas", :force => true do |t|
     t.string   "subdomain",                         :null => false
@@ -26,6 +26,22 @@ ActiveRecord::Schema.define(:version => 20130228054803) do
 
   add_index "akas", ["email"], :name => "index_akas_on_email"
   add_index "akas", ["subdomain"], :name => "index_akas_on_subdomain", :unique => true
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "open_id_associations", :force => true do |t|
     t.string  "server_url", :null => false
@@ -70,9 +86,10 @@ ActiveRecord::Schema.define(:version => 20130228054803) do
     t.string   "title"
     t.boolean  "autofollow"
     t.integer  "aka_id"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
-    t.string   "rel",        :default => "https://aka.nu/Profile"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+    t.string   "rel",         :default => "https://aka.nu/Profile"
+    t.string   "external_id"
   end
 
   add_index "profile_links", ["aka_id"], :name => "index_profile_links_on_aka_id"

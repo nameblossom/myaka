@@ -4,13 +4,13 @@
 ,  "title":"<%= escape_javascript(@aka.display_or_subdomain_name).html_safe %>"
 ,  "links":[
      {
-          "id":"OpenId2"
+          "id":"tag:aka.nu,2012:OpenId2:<%= @aka.domain_name %>"
      ,    "rel":"http://specs.openid.net/auth/2.0/provider"
      ,    "href":"https://<%= Myaka::Application.config.myaka_domain %>/openid"
      }
-   <% @aka.profile_links.each_with_index do |link,index| %>
+   <% @aka.profile_links.each do |link| %>
    , {
-          "id":"L<%= link.id %>"
+          "id":"<%= escape_javascript(link.external_id).html_safe %>"
       ,	  "rel":"https://aka.nu/Profile"
       ,	  "href":"<%= escape_javascript(link.href).html_safe %>"
       ,	  "titles":{"default":"<%= escape_javascript(link.title).html_safe %>"}
