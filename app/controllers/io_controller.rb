@@ -36,6 +36,7 @@ class IoController < ApplicationController
 
   def do_import data
     Aka.transaction do
+      current_aka.profile_links.clear
       data['profile_links'].each do |link|
         profile_link = current_aka.profile_links.build(href:link['href'],
                                                        autofollow:link['autofollow'],
