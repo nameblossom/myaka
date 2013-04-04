@@ -83,6 +83,20 @@
   <% end %>
 </div>
 
+<h2>import/export</h2>
+
+<div class='indent'>
+  <%= form_tag('/import', method:'POST', multipart:true) do %>
+  <p>You can import or export your current setup to run on your own
+    Myaka server instance.</p>
+  <p>
+    <input type='file' name='import_file'><br>
+    <input class='btn' type='submit' value='Upload Import File'>
+    <a class='btn' href='/export'>Download Export File</a>
+  </p>
+  <% end %>
+</div>
+
 <h2>keep me updated</h2>
 <div class='indent'>
   <p>Do you want to recieve updates about new features and things you can do with your aka? Even if you aren't subscribed, you

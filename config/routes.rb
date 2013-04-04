@@ -21,6 +21,8 @@ Myaka::Application.routes.draw do
     get '/privacy', to: 'static_pages#privacy'
     delete '/trustroot/:id', to: 'akas#remove_trust_root'
     get '/unsubscribe', to: 'mailing_list#unsubscribe'
+    post '/import', to: 'io#import'
+    get '/export', to: 'io#export'
     if Myaka::Application.config.profile_preview_domain == Myaka::Application.config.myaka_domain
       post '/preview-profile', to: 'akas#preview_profile'
     end
