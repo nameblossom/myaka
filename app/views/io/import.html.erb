@@ -1,0 +1,32 @@
+
+<%= form_tag('/import', method:'POST') %>
+<input type='hidden' name='confirmed' value='!'>
+<input type='hidden' name='import_data' value='<%= @import_data %>'>
+<h2>confirm import</h2>
+<% if @import['version'] != 1 %>
+<p><strong>This import file version (<%= @import['version'] %>) is not supported.</strong> Only version 1 files are supported.</p>
+<% else %>
+<p>Importing this configuration will completely replace your settings. This import file was originally
+  intended for <b><%= @import['aka'] %></b>.</p>
+
+<% if @import['tent_server'] %>
+<p>Tent Server: <%= @import['tent_server'] %></p>
+<% else %>
+<p><i>No tent server</i></p>
+<% end %>
+
+<h3>profile links</h3>
+
+<% @import['profile_links'].each do |link| %>
+
+<h4><%= link['title'] %> <small>(<%= link['rel'] %>)</small></h4>
+<p><%= link['href'] %> <%= '(autofollow)' if link['autofollow'] %></p>
+
+<% end %>
+
+
+<input type='submit' value='Import' class='btn btn-primary'>
+
+<a class='btn' href='/'>Cancel</a>
+  
+<% end %>

@@ -1,0 +1,6 @@
+{
+  "aka": "<%= current_aka.domain_name %>",
+  <% if current_aka.tent_server %>
+    "tent_server": "<%= escape_javascript(current_aka.tent_server).html_safe %>"
+  <% end %>
+}
