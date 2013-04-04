@@ -46,6 +46,7 @@ class IoController < ApplicationController
         profile_link.save!
       end
       current_aka.profile.profile_source = data['profile_template']
+      current_aka.profile.save!
       current_aka.tent_server = data['tent_server']
       current_aka.save!
     end
