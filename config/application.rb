@@ -22,6 +22,7 @@ module Myaka
     config.myaka_domain = 'my.aka.nu'
     config.profile_preview_domain = 'profile-preview.aka.nu'
     config.backend_domain = nil
+    config.support_mail_from = nil
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
