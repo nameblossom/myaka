@@ -31,8 +31,13 @@ class ProfileController < ActionController::Base
   end
 
   def get_aka
-    subdomain = request.headers['Host'].sub(/\.#{Regexp.escape(Myaka::Application.config.aka_domain)}\Z/,'')
-    @aka = Aka.find_by_subdomain subdomain
+    if request.headers['Host'] != Myaka::Application.config.backend_domain
+      subdomain = request.headers['Host'].sub(/\.#{Regexp.escape(Myaka::Application.config.aka_domain)}\Z/,'')
+      @aka = Aka.find_by_subdomain subdomain
+    else
+      @aka = Aka.find_by_subdomain(params[:subdomain])
+      raise ActionController::RoutingError.new('Not Found') unless @aka
+    end
   end
 
   def preview
