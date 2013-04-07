@@ -16,6 +16,9 @@ class Aka < ActiveRecord::Base
   has_many :openid_trust_roots
   has_one :profile_page
   has_many :password_resets
+  has_many :public_resources
+
+  after_save :update_resources
 
   def profile
     return self.profile_page || self.create_profile_page
@@ -47,6 +50,16 @@ class Aka < ActiveRecord::Base
 
   def insecure_url
     "http://#{self.domain_name}/"
+  end
+
+  def get_or_create_resource path
+    self.public_resources.find_by_path(path) || self.public_resources.build(path:path)
+  end
+
+  def update_resources
+    self.get_or_create_resource("/").save_home_page!
+    self.get_or_create_resource("/.well-known/host-meta").save_host_meta!
+    self.get_or_create_resource("/.well-known/host-meta.json").save_host_meta_json!
   end
 
 end

@@ -7,11 +7,17 @@ class ProfileLink < ActiveRecord::Base
   belongs_to :aka
 
   before_save :set_default
+  after_save :update_profile
+  after_destroy :update_profile
 
   protected
   
   def set_default
     self.external_id ||= SecureRandom.uuid
+  end
+
+  def update_profile
+    self.aka.update_resources
   end
 
 end

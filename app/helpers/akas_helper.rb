@@ -31,7 +31,7 @@ END
   end
 
   def render_profile(aka, profile_source=nil)
-    profile_source = profile_source || aka.profile.profile_source || default_profile
+    profile_source = profile_source || (aka.profile_page ? aka.profile_page.profile_source : nil) || default_profile
 
     displayname = aka.display_or_subdomain_name
     profilelinks = aka.profile_links.map { |link| { url: link.href, title: link.title } }

@@ -29,15 +29,16 @@ Myaka::Application.routes.draw do
   end
 
   constraints lambda {|req| (req.headers['Host'] != Myaka::Application.config.myaka_domain and
-                             req.headers['Host'] != Myaka::Application.config.profile_preview_domain) } do
-    root to: 'profile#home'
-    match '/.well-known/host-meta', to: 'profile#host_meta', defaults: { format: :xrd }
+                             req.headers['Host'] != Myaka::Application.config.profile_preview_domain and
+                             req.headers['Host'] != Myaka::Application.config.backend_domain) } do
+    get '/', to: 'public_resource#show'
+    get '/*path', to: 'public_resource#show', format: false
   end
 
   if Myaka::Application.config.backend_domain
     constraints lambda {|req| (req.headers['Host'] == Myaka::Application.config.backend_domain)} do
-      match '/backend/:subdomain/', to: 'profile#home'
-      match '/backend/:subdomain/.well-known/host-meta', to: 'profile#host_meta', defaults: { format: :xrd }
+      get '/backend/:subdomain', to: 'public_resource#show'
+      get '/backend/:subdomain/*path', to: 'public_resource#show', format: false
     end
   end
 

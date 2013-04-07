@@ -41,8 +41,8 @@ class ProfileLinksController < ApplicationController
   def destroy
     @link = ProfileLink.find(params[:id])
     @deleted = false
-    if current_aka.id == @link.aka_id
-      @deleted = @link.delete
+    if current_aka == @link.aka
+      @deleted = @link.destroy
     end
     respond_to do |format|
       format.js
