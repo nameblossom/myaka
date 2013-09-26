@@ -62,7 +62,7 @@ class AkasController < ApplicationController
       render text: render_profile(current_aka, params[:profile][:profile_source])
       return
     end
-    saved = current_aka.profile.profile_source = params[:profile][:profile_source]
+    saved = current_aka.profile.update_attributes(profile_source: params[:profile][:profile_source])
     if saved
       flash[:success] = 'Profile saved'
       redirect_to root_path
