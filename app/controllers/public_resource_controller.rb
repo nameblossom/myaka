@@ -16,7 +16,7 @@ class PublicResourceController < ActionController::Base
     response.headers['ETag'] = resource.etag
     if resource.headers
       resource.headers.split("\n").each do |line|
-        resource.headers[line.slice(0,line.index(':'))] = line.slice(line.index(':')+1,line.length)
+        response.headers[line.slice(0,line.index(':'))] = line.slice(line.index(':')+1,line.length)
       end
     end
     send_data resource.content, type: resource.content_type, disposition: :inline

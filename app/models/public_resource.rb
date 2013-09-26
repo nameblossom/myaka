@@ -5,7 +5,7 @@ require 'builder'
 class PublicResource < ActiveRecord::Base
   include AkasHelper
 
-  attr_accessible :content, :etag, :headers, :path
+  #attr_accessible :content, :etag, :headers, :path
   validates_presence_of :content, :etag, :content_type
   validates :path, uniqueness: { :scope => :aka_id }
   belongs_to :aka
@@ -72,4 +72,5 @@ class PublicResource < ActiveRecord::Base
     self.etag = digest.to_s
     self.save!
   end
+  
 end

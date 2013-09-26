@@ -6,7 +6,7 @@ class AkasController < ApplicationController
   end
 
   def create
-    @aka = Aka.new(params[:aka])
+    @aka = Aka.new(aka_params)
     @aka.subdomain = params[:subdomain]
     if @aka.save
       sign_in @aka
@@ -26,7 +26,7 @@ class AkasController < ApplicationController
       end
     end
     if @errors.empty?
-      @saved = current_aka.update_attributes(params[:current_aka])
+      @saved = current_aka.update_attributes(current_aka_params)
       unless @saved
         @errors += current_aka.errors.full_messages
       end
@@ -62,7 +62,7 @@ class AkasController < ApplicationController
       render text: render_profile(current_aka, params[:profile][:profile_source])
       return
     end
-    saved = current_aka.profile.update_attributes(params[:profile])
+    saved = current_aka.profile.profile_source = params[:profile][:profile_source]
     if saved
       flash[:success] = 'Profile saved'
       redirect_to root_path
@@ -78,4 +78,12 @@ class AkasController < ApplicationController
       @trust_root.delete
     end
   end
+  
+  private
+    def aka_params
+      return params[:aka].permit(:display_name, :email, :password, :password_confirmation, :tent_server, :keep_me_updated)
+    end
+    def current_aka_params
+      return params[:current_aka].permit(:display_name, :email, :password, :password_confirmation, :tent_server, :keep_me_updated)
+    end
 end

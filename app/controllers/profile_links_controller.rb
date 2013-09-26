@@ -15,7 +15,7 @@ class ProfileLinksController < ApplicationController
 
   def update
     @link = current_aka.profile_links.find(params[:id])
-    @saved = @link.update_attributes(params[:profile_link])
+    @saved = @link.update_attributes(profile_link_attributes)
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js { render 'create' }
@@ -30,7 +30,7 @@ class ProfileLinksController < ApplicationController
   end
 
   def create
-    @link = current_aka.profile_links.build(params[:profile_link])
+    @link = current_aka.profile_links.build(profile_link_attributes)
     @saved = @link.save
     respond_to do |format|
       format.js
@@ -48,4 +48,9 @@ class ProfileLinksController < ApplicationController
       format.js
     end
   end
+  
+  private
+    def profile_link_attributes
+      params[:profile_link].permit(:autofollow, :href, :title)
+    end
 end
